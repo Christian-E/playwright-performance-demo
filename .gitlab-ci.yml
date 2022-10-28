@@ -1,0 +1,16 @@
+default:
+  image: mcr.microsoft.com/playwright:v1.27.1-focal@sha256:76a5b662f8664eddebe89383e920af4fc3d4ac0b62f0ff94281dbc337d0a9dd6
+
+stages:
+  - test
+
+base-e2e-tests:
+  stage: test
+  script:
+    - npm ci
+    - npx playwright install
+    - npm run test
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
